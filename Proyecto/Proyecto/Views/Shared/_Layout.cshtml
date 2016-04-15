@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+  
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (Convert.ToInt32(Session["idRol"]) == 2)
+                {
+                    @Html.ActionLink("Venta de Autos Go-Cars ", "Inicio", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else { @Html.ActionLink("Venta de Autos Go-Cars ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) }
+               
+            </div>
+            @* se evalua secion *@
+           @if (Session["idUsuario"] != null)
+            {
+            <ul class="nav navbar-nav navbar-right">
+
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        @Session["nombreUsuario"] <samp class="caret"></samp>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header"> Opciones</li>
+                            <li class="user-header">
+                               
+                                
+                              </li>
+                            @if (Convert.ToInt32(Session["idRol"]) == 2)
+                            {
+                                <li> @Html.ActionLink("Perfil", "Edit", "Usuario1")</li>
+                            }
+                            <li>@Html.ActionLink("logut", "logunt", "Login")</li>
+                        </ul>
+                    </a>
+                </li>
+            </ul>
+           }
+            else
+            {
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Registrar", "Create1", "Usuarios", new { area = "" }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+            </ul>
+            }
+
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Diego lopez</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

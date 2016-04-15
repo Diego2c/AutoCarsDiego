@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Proyecto.Models.Carro>
+
+@{
+    ViewBag.Title = "Vendidos";
+}
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+<h2>Vendidos</h2>
+
+<p>
+    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.estado.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marca.nombreMarca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marca.nombreMarca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idCarro }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idCarro }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idCarro })
+        </td>
+    </tr>
+}
+
+</table>
+
+
+    @Html.ActionLink("Regresar", "../Home/Index")
+}
+else
+{
+    <h2>Este contenido es solo para el administrador</h2>
+}

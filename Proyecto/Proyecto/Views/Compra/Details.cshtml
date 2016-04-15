@@ -1,0 +1,76 @@
+﻿@model Proyecto.Models.Carro
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 2)
+{
+
+    <h2>Detalles</h2>
+
+    <div>
+        <h4>Carro</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.estado.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.estado.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.marca.nombreMarca)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.marca.nombreMarca)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.modelo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.modelo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.precio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.precio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+            @if (Model.imgenCarrro.Any(f => f.tip == Proyecto.Models.FileType.Imagen))
+            {
+                <dt>
+                    Imagen
+                </dt>
+                <dd>
+                    <img src="~/ImagenCarro?id=@Model.imgenCarrro.First(f => f.tip == Proyecto.Models.FileType.Imagen ).idImagenCarro " alt="imagen" width="200" />
+                </dd>
+            }
+
+        </dl>
+    </div>
+    <p>
+     
+      
+    </p>
+    @Html.ActionLink("Regresar", "../Compra/IndexUsuario")
+}
+else
+{
+    <h2>Este contenido es solo para un usuario</h2>
+}

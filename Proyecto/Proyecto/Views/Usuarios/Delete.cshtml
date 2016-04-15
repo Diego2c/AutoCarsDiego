@@ -1,0 +1,91 @@
+﻿@model Proyecto.Models.Usuario
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+    <h2>Eliminar</h2>
+
+    <h3>Seguro que Quieres eliminarlo?</h3>
+    <div>
+        <h4>Usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Rol.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Rol.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.carne)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.carne)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.contraseña)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.contraseña)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.confirmarContraseña)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.confirmarContraseña)
+            </dd>
+            @if (Model.ImagenUsuario.Any(f => f.tip == Proyecto.Models.FileType.Imagen))
+            {
+                <dt>
+                    Imagen
+                </dt>
+                <dd>
+                    <img src="~/ImagenUsuario?id=@Model.ImagenUsuario.First(f => f.tip == Proyecto.Models.FileType.Imagen).idImagenUsuario" alt="imagen" width="200" />
+                </dd>
+            }
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar", "Index")
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <h2>Este contenido es solo para el administrador</h2>
+}

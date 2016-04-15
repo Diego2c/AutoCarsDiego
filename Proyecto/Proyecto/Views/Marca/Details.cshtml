@@ -1,0 +1,44 @@
+﻿@model Proyecto.Models.Marca
+
+@{
+    ViewBag.Title = "Detalles";
+}
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+    <h2>Details</h2>
+
+    <div>
+        <h4>Marca</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombreMarca)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombreMarca)
+            </dd>
+
+            @if (Model.ImgenMarca.Any(f => f.tip == Proyecto.Models.FileType.Imagen))
+            {
+                <dt>
+                    Imagen
+                </dt>
+                <dd>
+                    <img src="~/ImgenMarca?id=@Model.ImgenMarca.First(f => f.tip == Proyecto.Models.FileType.Imagen ).idImagenMarca" alt="imagen" width="200" />
+                </dd>
+            }
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.idMarca }) |
+        @Html.ActionLink("Regresar", "Index")
+    </p>
+
+
+}
+else
+{
+    <h2>Este contenido es solo para el administrador</h2>
+}

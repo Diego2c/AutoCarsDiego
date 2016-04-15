@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Proyecto.Models.Marca>
+
+@{
+    ViewBag.Title = "Marcas";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 2)
+{
+
+    <h2>Marca</h2>
+
+    using (Html.BeginForm("IndexUsuario", "Compra", FormMethod.Get))
+    {
+        <p>
+            Buscar por NOmbre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+
+    <p>
+        @Html.ActionLink("Nueva Marca", "Create")
+    </p>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-success ">
+                    <div class="panel-heading">@Html.DisplayFor(modelItem => item.nombreMarca)</div>
+                    <div class="panel-body">
+                        <table>
+
+                            <tr><td colspan="2"><img src="~/ImgenMarca?id=@item.ImgenMarca.First(f => f.tip == Proyecto.Models.FileType.Imagen ).idImagenMarca" alt="imagen" width="70" /></td></tr>
+                            <tr>
+                                <td class="text-info"><strong>@Html.ActionLink("Marca", "IndexUsuario", new { sortOrder = ViewBag.NameSortParm }):</strong> </td>
+                                <td>@Html.DisplayFor(modelItem => item.nombreMarca)</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        @Html.ActionLink("Ver Autos", "IndexAutos", new { id = item.idMarca }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @Html.ActionLink("Regresar", "../Home/Inicio")
+}
+else
+{
+    <h2>inicie seccion para acceder al contenido</h2>
+}

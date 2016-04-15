@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Proyecto.Models.Carro>
+
+@{
+    ViewBag.Title = "Autos";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 2)
+{
+
+<h2>Ver autos</h2>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-success ">
+                    <div class="panel-heading">@Html.DisplayFor(modelItem => item.estado.nombre)</div>
+                    <div class="panel-body">
+                        <table>
+                            <tr><img src="~/ImagenCarro?id=@item.imgenCarrro.First(f => f.tip == Proyecto.Models.FileType.Imagen ).idImagenCarro " alt="imagen" width="200" /></tr>
+                            <tr>
+                                <td class="text-info"><strong>Modelo:</strong> </td>
+                                <td>@Html.DisplayFor(modelItem => item.modelo)</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                       @Html.ActionLink("Comprar", "Create", new { idCa = item.idCarro }) |
+                       @Html.ActionLink("Detalles", "Details", new { idCa = item.idCarro }) |
+                    @*   @Html.ActionLink("Apartar", "Cpedido","Pedido", new { idCa = item.idCarro }) |*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+@Html.ActionLink("Regresar", "../Compra/IndexUsuario")
+
+}
+else
+{
+<h2> :( contenido invalido </h2>
+}

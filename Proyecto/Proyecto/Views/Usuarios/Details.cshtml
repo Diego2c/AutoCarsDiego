@@ -1,0 +1,84 @@
+﻿@model Proyecto.Models.Usuario
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+    <h2>Detalles</h2>
+
+    <div>
+        <h4>Usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Rol.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Rol.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.carne)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.carne)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.contraseña)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.contraseña)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.confirmarContraseña)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.confirmarContraseña)
+            </dd>
+            @if (Model.ImagenUsuario.Any(f => f.tip == Proyecto.Models.FileType.Imagen))
+            {
+                <dt>
+                    Imagen
+                </dt>
+                <dd>
+                    <img src="~/ImagenUsuario?id=@Model.ImagenUsuario.First(f => f.tip == Proyecto.Models.FileType.Imagen).idImagenUsuario" alt="imagen" width="200" />
+                </dd>
+            }
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdUsuario }) |
+        @Html.ActionLink("Regresar", "Index")
+    </p>
+
+}
+else
+{
+    <h2>Este contenido es solo para el administrador</h2>
+}

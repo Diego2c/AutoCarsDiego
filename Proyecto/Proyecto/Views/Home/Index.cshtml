@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+
+    <div class="jumbotron">
+        <h1>Bievenido:   @Session["nombreUsuario"] </h1>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Usuarios</h2>
+        <p>Hey Solo tu puedes administrar los Usuarios que tienen cuaneta en tu pagina  :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Usuarios", "Index", "Usuarios")</label></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Marca</h2>
+        <p>Empieza Administrando  Marcas  :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Marcas", "Index", "Marca")</label></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Autos</h2>
+        <p>Empieza Administrando  Autos  :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Carros", "Index", "Carro")</label></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Compras</h2>
+        <p>Ve todos los autos que ya se han comprados :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Compras", "Vendidos", "Carro")</label></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Ver Pedidos</h2>
+        <p>Ve todos los autos que han sido pedidos :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Apartados", "Apartados", "Carro")</label></p>
+    </div>
+
+}
+else
+{
+    <h2> iniciar secion por favor </h2>
+}

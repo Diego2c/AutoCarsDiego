@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Proyecto.Models.Marca>
+
+@{
+    ViewBag.Title = "Marca";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+    <h2>Marca</h2>
+
+    using (Html.BeginForm("Index", "Marca", FormMethod.Get))
+    {
+        <p>
+            Buscar por NOmbre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+
+    <p>
+        @Html.ActionLink("Nueva Marca", "Create")
+    </p>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-success ">
+                    <div class="panel-heading">@Html.DisplayFor(modelItem => item.nombreMarca)</div>
+                    <div class="panel-body">
+                        <table>
+                            
+                            <tr><td colspan="2"><img src="~/ImgenMarca?id=@item.ImgenMarca.First(f => f.tip == Proyecto.Models.FileType.Imagen ).idImagenMarca" alt="imagen" width="70" /></td></tr>
+                            <tr>
+                                <td class="text-info"><strong>@Html.ActionLink("Marca", "Index", new { sortOrder = ViewBag.NameSortParm }):</strong> </td>
+                                <td>@Html.DisplayFor(modelItem => item.nombreMarca)</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.idMarca }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idMarca }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.idMarca }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        }
+            </div>
+
+    @Html.ActionLink("Regresar", "../Home/Index")
+}
+else
+{
+    <h2>inicie seccion para acceder al contenido</h2>
+}

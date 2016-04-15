@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 2)
+{
+
+    <div class="jumbotron">
+        <h1>Bievenido:   @Session["nombreUsuario"] </h1>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Marcas</h2>
+        <p>Mira las marcas disponibles para comprar auto  :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Marcas", "IndexUsuario", "Compra")</label></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Compras</h2>
+        <p>Ve el listado de tus compras :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Compras", "Index", "Compra")</label></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ver Pedidos</h2>
+        <p> tienes pedidos pendietnes   :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Pedidos", "Index", "Pedido")</label></p>
+    </div>
+
+    @*<div class="col-md-4">
+        <h2>Ver Compras</h2>
+        <p>Ve todos los autos que ya se han comprados :)</p>
+        <p><label class="btn btn-default">@Html.ActionLink("Ver Compras", "Vendidos", "Carro")</label></p>
+    </div>*@
+
+
+
+}
+else
+{
+    <h2> :( contenido invalido </h2>
+}

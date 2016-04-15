@@ -1,0 +1,52 @@
+﻿@model Proyecto.Models.Marca
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+    <h2>Eliminar</h2>
+
+    <h3>Seguro que deseas eliminarla?</h3>
+    <div>
+        <h4>Marca</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombreMarca)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombreMarca)
+            </dd>
+
+        </dl>
+        @if (Model.ImgenMarca.Any(f => f.tip == Proyecto.Models.FileType.Imagen))
+        {
+            <dt>
+                Imagen
+            </dt>
+            <dd>
+                <img src="~/ImgenMarca?id=@Model.ImgenMarca.First(f => f.tip == Proyecto.Models.FileType.Imagen ).idImagenMarca" alt="imagen" width="200" />
+            </dd>
+        }
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar", "Index")
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <h2>Este contenido es solo para el administrador</h2>
+}

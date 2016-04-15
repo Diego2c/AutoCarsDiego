@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Proyecto.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (Convert.ToInt32(Session["idRol"]) == 1)
+{
+
+    <h2>Usuarios </h2>
+    <h4> Registrados</h4>
+
+    using (Html.BeginForm("Index", "Usuarios", FormMethod.Get))
+    {
+        <p>
+            Buscar por NOmbre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+    <p>
+        @Html.ActionLink("Nuevo Usuario", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+               @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.carne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contraseña)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.confirmarContraseña)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rol.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.carne)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contraseña)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.confirmarContraseña)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdUsuario }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdUsuario })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.ActionLink("Regresar", "../Home/Index")
+}
+else
+{
+    <h2>Este contenido es solo para el administrador</h2>
+}
